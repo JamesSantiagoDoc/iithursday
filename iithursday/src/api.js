@@ -21,7 +21,8 @@ router.post("/", (req, res) => {
  })
 
 
-router     .route("/:id")
+router     
+     .route("/:id")
      .get((req, res) => {
         //res.send(`Get a User with ID: ${req.params.id}`)        
         const query = {_id: ObjectId(req.params.id)
@@ -33,7 +34,9 @@ router     .route("/:id")
      })
      .put((req, res) => {
          //res.send(`Update a User with ID: ${req.params.id}`)         
-         const query = {_id: ObjectId(req.params.id)}
+         const query = {
+            _id: ObjectId(req.params.id)
+        }
          let newvalues = { $set: req.body };
          collection.updateOne(query, newvalues, (err, result) => {
              if (err) throw err;
