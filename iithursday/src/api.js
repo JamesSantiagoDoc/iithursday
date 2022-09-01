@@ -37,28 +37,25 @@ router
      .route("/:id")
      .get((req, res) => {
         //res.send(`Get a User with ID: ${req.params.id}`)        
-        const query = {_id: ObjectId(req.params.id)
-        }
-        collection.findOne(query, (err, result) => {
+        
+        collection.findOne({_id: ObjectId(req.params.id)}, (err, result) => {
              if (err) throw err;
              res.send(result)
-        })
+        });
      })
      .put((req, res) => {
          //res.send(`Update a User with ID: ${req.params.id}`)         
-         const query = {
-            _id: ObjectId(req.params.id)
-        }
+         let myquery =  {_id: ObjectId(req.params.id)}
          let newvalues = { $set: req.body };
-         collection.updateOne(query, newvalues, (err, result) => {
+         collection.updateOne(myquery, newvalues, (err, res) => {
              if (err) throw err;
          })
          res.send("1 document updated.")
      })
      .delete((req, res) => {
          //res.send(`Delete a User with ID: ${req.params.id}`)         
-         const query = {_id: ObjectId(req.params.id)}
-         collection.deleteOne(query, (err, result) => {
+         let myquery = {_id: ObjectId(req.params.id)};
+         collection.deleteOne(myquery, function(err, obj) {
              if (err) throw err;
          })
          res.send("1 document deleted.")
